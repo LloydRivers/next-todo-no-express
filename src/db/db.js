@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 let isConnected = false;
 
-const connect = async () => {
-  if (!isConnected) {
+export const connectToDatabase = async () => {
+  if (isConnected) {
     console.log("Already connected to the database");
     return;
   }

@@ -1,5 +1,7 @@
 import { getSearchParam } from "@/utils/getSearchParam.js";
 import { todos } from "@data/data.js";
+import { connectToDatabase } from "@db/db.js";
+import { Todo } from "@models/Todo.js";
 export const GET = async (request) => {
   const id = getSearchParam(request);
   if (!id) {
@@ -18,6 +20,7 @@ export const GET = async (request) => {
 };
 
 export const POST = async (request) => {
+  await connectToDatabase();
   const { task, description, priority, completed } = await request.json();
   const newId = todos.length + 1;
   const newTodo = { id: newId, task, description, priority, completed };
